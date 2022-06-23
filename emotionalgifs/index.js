@@ -1,10 +1,11 @@
 const multipart = require('parse-multipart');
+const fetch = require('node-fetch');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     const boundary = multipart.getBoundary(req.headers['content-type']);
-    const body = req.body;
+    const body = req.body; // req.body, not req.query.body, query is like the parameters
     const parts = multipart.Parse(body, boundary);
     const result = await analyzeImage(parts[0].data);
     context.res = {
@@ -16,20 +17,21 @@ module.exports = async function (context, req) {
     context.done(); 
 }
 
+// async function run in the background
 async function analyzeImage(img){
-    const subscriptionKey = 'd94922ac7b7744e4b6ff15775e4f52f0';
-    const uriBase = 'https://noahsfaceapi.cognitiveservices.azure.com/face/v1.0/detect';
+    const subscriptionKey = process.env.SUBSCRIPTIONKEY;
+    const uriBase = process.env.ENDPOINT + '/face/v1.0/detect';
 
-    // specify the parameters for your request
+    // specify the parameters for the URL request
     let params = new URLSearchParams({
         'returnFaceId': 'true',
         'returnFaceAttributes': 'emotion'
     })
 
+    // await will wait for the data to come back
     let resp = await fetch(uriBase + '?' + params.toString(), {
-        method: 'POST',  //WHAT TYPE OF REQUEST?
-        body: 'img',  //WHAT ARE WE SENDING TO THE API?
-      	//ADD YOUR TWO HEADERS HERE
+        method: 'POST', 
+        body: 'img',  // binary file for image
         headers: {
             'Content-Type': 'application/octet-stream',
             'Ocp-Apim-Subscription-Key': subscriptionKey
