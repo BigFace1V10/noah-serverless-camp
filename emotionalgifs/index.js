@@ -31,7 +31,7 @@ async function analyzeImage(img){
     // await will wait for the data to come back
     let resp = await fetch(uriBase + '?' + params.toString(), {
         method: 'POST', 
-        body: 'img',  // binary file for image
+        body: img,  // binary file for image
         headers: {
             'Content-Type': 'application/octet-stream',
             'Ocp-Apim-Subscription-Key': subscriptionKey
