@@ -8,10 +8,15 @@ module.exports = async function (context, req) {
     const body = req.body; // req.body, not req.query.body, query is like the parameters
     const parts = multipart.Parse(body, boundary);
     const result = await analyzeImage(parts[0].data);
+    let emotions = result[0].faceAttributes.emotion;
+
+    // find the dominant emotion
+    // context.log(emotions);
+    let objects = Object.values(emotions);
+    const main_emotion = Object.keys(emotions).find(key => emotions[key] === Math.max(...objects));
+
     context.res = {
-        body: {
-            result
-        }
+        body: main_emotion
     };
     console.log(result)
     context.done(); 
