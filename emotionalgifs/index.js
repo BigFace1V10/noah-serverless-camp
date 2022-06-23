@@ -14,15 +14,25 @@ module.exports = async function (context, req) {
     // context.log(emotions);
     let objects = Object.values(emotions);
     const main_emotion = Object.keys(emotions).find(key => emotions[key] === Math.max(...objects));
+    // get a gif link from giphy api
+    let gifLink = await findGifs(main_emotion);
 
     context.res = {
-        body: main_emotion
+        body: gifLink
     };
     console.log(result)
     context.done(); 
 }
 
 // async function run in the background
+async function findGifs(emotion){
+    const apikey = process.env.GIFKEY; // or process.env['the secret name']
+    const apiResult = await fetch ("https://api.giphy.com/v1/gifs/translate?api_key=" + apikey + "&limit=1&s=" + emotion); // limit to one gif
+    // convert apiResult into JSON format
+    const jsonResult = await apiResult.json(); // this includes all the info
+    return jsonResult.data.url; // return the url info inside json
+}
+
 async function analyzeImage(img){
     const subscriptionKey = process.env.SUBSCRIPTIONKEY;
     const uriBase = process.env.ENDPOINT + '/face/v1.0/detect';
