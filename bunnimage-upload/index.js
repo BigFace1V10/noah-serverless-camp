@@ -7,29 +7,32 @@ module.exports = async function (context, req) {
 
     const boundary = multipart.getBoundary(req.headers['content-type']);
     const body = req.body; // req.body, not req.query.body, query is like the parameters
-    const parsedBody = multipart.Parse(body, boundary);
-
-    let filetype = parsedBody[0].type;
-    if (filetype == "image/png") {
-        ext = "png";
-    } else if (filetype == "image/jpeg") {
-        ext = "jpeg";
-    } else if (filetype == "image/jpg") {
-        ext = "jpg";
-    } else {
-        username = "invalidimage"
-        ext = "";
-    }
 
     // let responseMessage = await uploadFile(parsedBody, ext);
     let responseMessage = ""
     try {
-        let password = req.headers['codename'] // get the header called "codename"
         // use parse-multipart to parse the body
+        const parsedBody = multipart.Parse(body, boundary);
         // determine the file-type here!
+        let filetype = parsedBody[0].type;
+        if (filetype == "image/png") {
+            ext = "png";
+        } else if (filetype == "image/jpeg") {
+            ext = "jpeg";
+        } else if (filetype == "image/jpg") {
+            ext = "jpg";
+        } else {
+            username = "invalidimage"
+            ext = "";
+        }
+
+        // get the header called "codename"
+        let fileName = req.headers['codename'] 
+
         responseMessage = await uploadFile(parsedBody, ext, password);
         // fill the parameters in!
     } catch(err) {
+        context.log(err);
         context.log("Undefined body image");
         responseMessage = "Sorry! No image attached."
     }
@@ -39,7 +42,7 @@ module.exports = async function (context, req) {
     };
 }
 
-async function uploadFile(parsedBody, ext, password)
+async function uploadFile(parsedBody, ext, fileName)
 {
     // Get reference to container
     const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
@@ -47,7 +50,7 @@ async function uploadFile(parsedBody, ext, password)
     const containerClient = blobServiceClient.getContainerClient(containerName);    // Get a reference to a container 
     
     // Create a blob
-    const blobName = password + '.' + ext;    // Create the container
+    const blobName = fileName + '.' + ext;    // Create the container
     const blockBlobClient = containerClient.getBlockBlobClient(blobName); // Get a block blob client
 
     // Upload data to blob
