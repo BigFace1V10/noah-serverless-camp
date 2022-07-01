@@ -1,13 +1,11 @@
-const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING
+const connectionString = process.env["AZURE_STORAGE_CONNECTION_STRING"]
 const {BlobServiceClient} = require("@azure/storage-blob")
 const account = "noahblobstorage"
 
 module.exports = async function (context, myTimer) {
-    var timeStamp = new Date().toISOString();
-    
     // create blob & container service client
     const blobServiceClient = await BlobServiceClient.fromConnectionString(connectionstring);
-    const deletecontainer = "bunnimage";
+    const deletecontainer = "images";
     const blobContainerClient = await blobServiceClient.getContainerClient(deletecontainer);
 
     for await (const blob of blobContainerClient.listBlobsFlat()) {
@@ -17,10 +15,4 @@ module.exports = async function (context, myTimer) {
         await blobContainerClient.deleteBlob(blob.name);
     }
     context.log("Just deleted your blobs!")
-
-    if (myTimer.isPastDue)
-    {
-        context.log('JavaScript is running late!');
-    }
-    context.log('JavaScript timer trigger function ran!', timeStamp);   
 };
