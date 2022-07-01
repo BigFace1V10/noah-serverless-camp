@@ -15,20 +15,31 @@ module.exports = async function (context, req) {
     } else if (filetype == "image/jpeg") {
         ext = "jpeg";
     } else if (filetype == "image/jpg") {
-        ext = "jpg"
+        ext = "jpg";
     } else {
         username = "invalidimage"
         ext = "";
     }
 
-    let responseMessage = await uploadFile(parsedBody, ext);
+    // let responseMessage = await uploadFile(parsedBody, ext);
+    let responseMessage = ""
+    try {
+        let password = req.headers['codename'] // get the header called "codename"
+        // use parse-multipart to parse the body
+        // determine the file-type here!
+        responseMessage = await uploadFile(parsedBody, ext, password);
+        // fill the parameters in!
+    } catch(err) {
+        context.log("Undefined body image");
+        responseMessage = "Sorry! No image attached."
+    }
     context.res = {
         // status: 200, /* Defaults to 200 */
         body: responseMessage
     };
 }
 
-async function uploadFile(parsedBody, ext)
+async function uploadFile(parsedBody, ext, password)
 {
     // Get reference to container
     const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
