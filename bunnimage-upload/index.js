@@ -29,7 +29,7 @@ module.exports = async function (context, req) {
         // get the header called "codename"
         let fileName = req.headers['codename'] 
 
-        responseMessage = await uploadFile(parsedBody, ext, password);
+        responseMessage = await uploadFile(parsedBody, ext, fileName);
         // fill the parameters in!
     } catch(err) {
         context.log(err);
