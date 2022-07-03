@@ -1,10 +1,10 @@
-const connectionString = process.env["AZURE_STORAGE_CONNECTION_STRING"]
+const connectionstring = process.env["AZURE_STORAGE_CONNECTION_STRING"]
 const {BlobServiceClient} = require("@azure/storage-blob")
 const account = "noahblobstorage"
 
 module.exports = async function (context, myTimer) {
     // create blob & container service client
-    const blobServiceClient = await BlobServiceClient.fromConnectionString(connectionString);
+    const blobServiceClient = await BlobServiceClient.fromConnectionString(connectionstring);
     const deletecontainer = "images";
     const blobContainerClient = await blobServiceClient.getContainerClient(deletecontainer);
 
