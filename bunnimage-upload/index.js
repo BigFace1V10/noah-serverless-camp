@@ -46,7 +46,7 @@ async function uploadFile(parsedBody, ext, fileName)
 {
     // Get reference to container
     const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
-    const containerName = "bunnimage";
+    const containerName = "images";
     const containerClient = blobServiceClient.getContainerClient(containerName);    // Get a reference to a container 
     
     // Create a blob
