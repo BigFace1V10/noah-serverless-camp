@@ -4,7 +4,7 @@ const account = "noahblobstorage"
 
 module.exports = async function (context, myTimer) {
     // create blob & container service client
-    const blobServiceClient = await BlobServiceClient.fromConnectionString(connectionstring);
+    const blobServiceClient = await BlobServiceClient.fromConnectionString(connectionString);
     const deletecontainer = "images";
     const blobContainerClient = await blobServiceClient.getContainerClient(deletecontainer);
 
