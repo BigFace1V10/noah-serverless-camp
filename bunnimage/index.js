@@ -42,6 +42,41 @@ bunnForm.addEventListener('submit', async function (event) {
 }); // listen to event type called "submit"; get value of text box
 
 
+const downloadButton = document.getElementById("button2");
+
+downloadButton.addEventListener("click", async function(event) {
+    var username = document.getElementById("downloadusername").value;
+    console.log("attempting to get your image...")
+
+    const url = 
+    "https://serverlesscamp2022.azurewebsites.net/api/bunnimage-download?code=r7G5Yq5w4lD7ZrDJt311-Ky51cNasTcqsPJt2sKUUddmAzFu8FvbqQ=="
+
+    const resp = await fetch(url, {
+        method: "GET",
+        headers: {
+            username: username
+        }
+    });
+
+    // console.log(resp);
+    const data = await resp.json;
+    console.log("image has been received");
+    // console.log(data)
+    window.open(data.downloadUri, "_self")
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 // bunnForm.addEventListener('change', function (event) {
 //     const username = document.getElementById("username").value
 //     const filename = username.split(/(\\|\/)/g).pop()
