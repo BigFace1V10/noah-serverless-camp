@@ -17,6 +17,7 @@ module.exports = async function (context, req) {
     // //put what you want to turn into base64 inside "originaldata"
     // //"originaldata" will be encoded in base64.
 
+    // alternative: change this into array
     let name1 = req.query.name1;
     let name2 = req.query.name2;
     let name3 = req.query.name3;
