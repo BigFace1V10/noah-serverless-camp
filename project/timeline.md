@@ -3,14 +3,16 @@
 
 ## Week 1
 
-### [Task Name]:
+### Azure function:
 
 #### Description
-- [Replace with description]
+- Implement Azure functions to send request to Google Places API with users' input
+- Sort the tourist attraction list returned by Google with regard to their ratings
+- Randomly output parts of the attraction list for display
 
 #### ETA:
 > How long do you think it will take to complete this?
-- [Replace with eta]
+- 15 ~ 25 hrs
 
 #### Objective:
 > Checklist of everything you need to do to complete this issue
