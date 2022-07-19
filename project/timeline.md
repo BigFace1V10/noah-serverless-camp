@@ -1,30 +1,27 @@
 # Timeline
 > Note: Copy and paste the task template (bottom of page)
 
-## Week 1
+## Week 6 (Jul 18 - Jul 24)
 
-### Azure function:
+### Azure Function and simple UI
 
 #### Description
-- Implement Azure functions to send request to Google Places API with users' input
-- Sort the tourist attraction list returned by Google with regard to their ratings
-- Randomly output parts of the attraction list for display
+Develop the MVP of the project with Azure function and simple UI (index.html/js)
 
 #### ETA:
 > How long do you think it will take to complete this?
-- 15 ~ 25 hrs
+- 25 hrs
 
 #### Objective:
 > Checklist of everything you need to do to complete this issue
-- [ ] [Replace with small task  1]
-- [ ] [Replace with small task  2]
-- [ ] [Replace with small task  3]
+- [ ] Implement Azure functions to send request to Google Places API with users' input
+- [ ] Sort the tourist attraction list returned by Google with regard to their ratings
+- [ ] Randomly output parts of the attraction list
+- [ ] Develop simple index.html and js files for display
 
-## Week 2
+## Week 7
 
-## Week 3
-
-## Week 4
+## Week 8
 
 
 ---
