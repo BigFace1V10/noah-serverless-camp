@@ -18,20 +18,25 @@ travelForm.addEventListener('submit', async function (event) {
         };
         const resp = await fetch(endpoint, options);
         const data = await resp.json();
-        console.log(data);
-
-        const output = document.getElementById("output");
-        output.innerHTML = JSON.stringify(data);
+        outputData(data);
+        
 
     } catch(err) {
         console.log(err);
     }
 
 
-    
-    
-    
-    // console.log(location);
-    // console.log(category);
-    // console.log(quantity);
+
 })
+
+
+// create divs for each place and display with tidiness
+function outputData(data) {
+    const output = document.getElementById("output");
+    output.innerHTML = ""
+    for (var i = 0; i < data.length; i++) {
+        var div = document.createElement("div");
+        div.innerHTML = 'Name: ' + data[i].name + '<br>rating: ' + data[i].rating + '<br>Address: ' + data[i].vicinity;
+        output.appendChild(div);
+    }
+}
