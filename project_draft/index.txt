@@ -14,3 +14,12 @@ https://maps.googleapis.com/maps/api/place/findplacefromtext/json
   &inputtype=textquery
   &locationbias=circle%3A2000%4047.6918452%2C-122.2226413
   &key=AIzaSyBBTbUQYs0uGEzLxVh8v8k0p4SOenbe5Cw
+
+https://maps.googleapis.com/maps/api/place/nearbysearch/json
+  ?
+  radius=50000
+  &keyword=museum
+  &key=AIzaSyBBTbUQYs0uGEzLxVh8v8k0p4SOenbe5Cw
+  &location=40.7127753%2C-74.0059728
+
+https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=50000&keyword=museum&key=AIzaSyBBTbUQYs0uGEzLxVh8v8k0p4SOenbe5Cw&location=40.7127753%2C-74.0059728
